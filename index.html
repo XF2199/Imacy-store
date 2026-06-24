@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/sl94vb.jpg">
+  <title>IMACY STORE | Premium Digital Products 2026</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Bubblegum+Sans&family=Lilita+One&family=Inter:wght@400;500;600;700;800;900&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ff6b9d;
+      --pink-dark: #e8557d;
+      --pink-light: #ffb6c1;
+      --purple: #d63384;
+      --gold: #f59e0b;
+      --green: #10b981;
+      --green-light: #d1fae5;
+      --red: #e50914;
+      --red-light: #fce4e4;
+      --dark-bg: #0f0f1a;
+      --dark-card: #1a1a2e;
+      --dark-text: #f0e6ff;
+      --dark-border: #2a2a40;
+      --white: #ffffff;
+      --shadow: 0 8px 30px rgba(0,0,0,0.06);
+      --shadow-lg: 0 20px 50px rgba(0,0,0,0.1);
+      --radius-xl: 24px;
+      --radius-2xl: 28px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #fef5f9 0%, #fff0f5 30%, #fdf2f7 100%);
+      background-image: radial-gradient(circle, rgba(255,228,236,0.3) 1px, transparent 1px);
+      background-size: 18px 18px;
+      color: #2d1f2a;
+      transition: var(--transition);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    body.dark {
+      background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 30%, #151525 100%);
+      background-image: radial-gradient(circle, rgba(45,45,68,0.4) 1px, transparent 1px);
+      background-size: 18px 18px;
+      color: var(--dark-text);
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-thumb { background: #e0c0d0; border-radius: 10px; }
+    body.dark ::-webkit-scrollbar-thumb { background: #3a3a55; }
+
+    .running-text-bar {
+      background: linear-gradient(90deg, #ff6b9d, #d63384);
+      color: white; padding: 8px 0; font-size: 13px; font-weight: 600;
+      overflow: hidden; white-space: nowrap; position: sticky; top: 0; z-index: 100;
+    }
+    .running-text-inner { display: inline-block; animation: marquee 60s linear infinite; }
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    .running-text-inner span { margin: 0 40px; }
+
+    #loadingScreen {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(160deg, #fff5f8 0%, #ffe4ec 35%, #ffd6e0 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 10000; transition: opacity 0.6s ease;
+    }
+    body.dark #loadingScreen { background: linear-gradient(160deg, #0f0f1a 0%, #1a1a2e 35%, #151525 100%); }
+    .loading-logo-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 30px; }
+    .loading-logo-wrap img {
+      width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+      position: absolute; top: 20px; left: 20px; z-index: 2;
+      box-shadow: 0 0 50px rgba(255,105,180,0.35); animation: logoFloat 2.5s ease-in-out infinite;
+    }
+    @keyframes logoFloat { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-8px) scale(1.04); } }
+    .orbit-ring { position: absolute; top: 0; left: 0; width: 140px; height: 140px; border: 2px dashed rgba(255,105,180,0.2); border-radius: 50%; animation: ringSpin 8s linear infinite; }
+    @keyframes ringSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .loading-percent { font-weight: 900; font-size: 68px; letter-spacing: -3px; background: linear-gradient(135deg, #ff6b9d, #d63384); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .loading-brand { font-family: 'Bubblegum Sans', cursive; font-size: 20px; color: #c445a6; }
+    .loading-progress { width: 200px; height: 4px; background: rgba(255,105,180,0.12); border-radius: 10px; margin-top: 20px; overflow: hidden; }
+    .loading-progress-fill { height: 100%; background: linear-gradient(90deg, #ff6b9d, #d63384); border-radius: 10px; width: 1%; transition: width 0.06s ease; }
+
+    .dark-toggle { position: fixed; top: 50px; right: 18px; z-index: 999; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 1px solid #eee; }
+    body.dark .dark-toggle { background: rgba(26,26,46,0.9); border-color: #333; }
+
+    #app { max-width: 1000px; margin: 0 auto; padding: 12px 20px 50px; display: none; }
+    #app.active { display: block; animation: fadeSlideIn 0.5s ease; }
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .page { display: none; animation: fadeSlideIn 0.4s ease; }
+    .page.active { display: block; }
+
+    .site-header { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 12px 0 8px; flex-wrap: wrap; }
+    .site-header img.header-logo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 20px rgba(255,105,180,0.2); border: 2px solid white; }
+    body.dark .site-header img.header-logo { border-color: #2a2a40; }
+    .brand-text h1 { font-family: 'Lilita One', cursive; font-size: 28px; background: linear-gradient(135deg, #ff6b9d, #c445a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .brand-text span { font-size: 12px; color: #999; font-weight: 500; }
+
+    .search-container { margin: 10px auto 15px; max-width: 500px; position: relative; }
+    .search-container input { width: 100%; padding: 12px 45px 12px 20px; border-radius: 30px; border: 2px solid #f0e0e8; background: white; font-family: 'Inter', sans-serif; font-size: 14px; color: #333; outline: none; transition: var(--transition); box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+    body.dark .search-container input { background: var(--dark-card); border-color: var(--dark-border); color: var(--dark-text); }
+    .search-container input:focus { border-color: #ff6b9d; }
+    .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 18px; color: #ff6b9d; pointer-events: none; }
+
+    .music-player { background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); border-radius: 40px; padding: 8px 18px; display: flex; align-items: center; justify-content: space-between; margin: 8px 0 10px; gap: 10px; border: 1px solid rgba(255,182,193,0.3); flex-wrap: wrap; }
+    body.dark .music-player { background: rgba(26,26,46,0.7); border-color: rgba(255,105,180,0.15); }
+    .song-title { font-size: 12px; font-weight: 600; color: #c445a6; }
+    .visualizer { display: flex; align-items: flex-end; gap: 2px; height: 26px; flex: 1; justify-content: center; }
+    .bar { width: 4px; background: linear-gradient(180deg, #ff6b9d, #ffb6c1); border-radius: 3px; animation: barWave infinite alternate; }
+    @keyframes barWave { 0% { height: 5px; } 100% { height: 24px; } }
+    .ctrl-btn { width: 32px; height: 32px; border-radius: 50%; background: #ff6b9d; border: none; color: white; font-size: 13px; cursor: pointer; }
+
+    .nav-tabs { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: 10px 0 18px; }
+    .nav-tab { font-weight: 600; font-size: 13px; padding: 9px 20px; border-radius: 25px; border: 1.5px solid #eee; background: white; color: #666; cursor: pointer; }
+    body.dark .nav-tab { background: var(--dark-card); border-color: #333; color: #bbb; }
+    .nav-tab:hover, .nav-tab.active { background: #ff6b9d; color: white; border-color: transparent; }
+
+    .hero-card { background: white; border-radius: var(--radius-2xl); padding: 32px 24px; text-align: center; margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid #f0e0e8; }
+    body.dark .hero-card { background: var(--dark-card); border-color: var(--dark-border); }
+    .hero-card img.hero-img { width: 100%; max-width: 420px; border-radius: 14px; margin: 14px auto; }
+    .hero-stats { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+    .hero-stat { text-align: center; background: #fef5f9; border-radius: 14px; padding: 12px 20px; min-width: 80px; }
+    body.dark .hero-stat { background: #1e1e32; }
+    .stat-number { font-weight: 900; font-size: 22px; color: #d63384; }
+
+    .section-title { font-weight: 800; font-size: 20px; text-align: center; background: linear-gradient(135deg, #ff6b9d, #d63384); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 25px 0 14px; }
+
+    /* Rekomendasi badge */
+    .rekomendasi-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-left: 6px;
+      animation: pulseBadge 2s infinite;
+    }
+    @keyframes pulseBadge {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Netflix Card Special */
+    .netflix-card {
+      background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+      border: 2px solid #e50914;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(229,9,20,0.2);
+      color: white;
+    }
+    .netflix-card .mac-bar { background: #111; }
+    .netflix-card .card-body { color: #ddd; }
+    .netflix-card .brand-name { color: #e50914 !important; }
+    .netflix-price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 12px;
+    }
+    .netflix-price-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #333;
+    }
+    .netflix-price-table .price { color: #e50914; font-weight: 700; }
+    .netflix-banner {
+      background: #e50914;
+      color: white;
+      text-align: center;
+      padding: 4px;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .products-grid { display: flex; flex-direction: column; gap: 18px; }
+    .product-row { display: flex; justify-content: flex-start; }
+    .product-row.right { justify-content: flex-end; }
+    .product-card { background: white; border-radius: var(--radius-xl); width: 85%; max-width: 520px; box-shadow: var(--shadow); border: 1px solid #f0e0e8; transition: var(--transition); overflow: hidden; cursor: pointer; }
+    body.dark .product-card { background: var(--dark-card); border-color: var(--dark-border); }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: #ffb6c1; }
+    .mac-bar { background: #f8f8f8; padding: 10px 16px; display: flex; gap: 7px; border-radius: 24px 24px 0 0; }
+    body.dark .mac-bar { background: #222238; }
+    .mac-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mac-dot.red { background: #ff5f57; } .mac-dot.yellow { background: #ffbd2e; } .mac-dot.green { background: #27ca40; }
+    .card-body { padding: 16px 20px 20px; }
+    .product-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .product-brand img { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: #f5f5f5; padding: 3px; }
+    .brand-name { font-weight: 700; font-size: 15px; }
+    .rating-sold-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+    .stars { color: #f59e0b; font-size: 13px; }
+    .sold-badge { background: var(--green-light); color: #059669; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .btn-outline { display: inline-block; padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 12px; border: 1.5px solid #ff6b9d; color: #ff6b9d; background: transparent; cursor: pointer; }
+    .btn-outline:hover { background: #ff6b9d; color: white; }
+
+    .detail-container { background: white; border-radius: var(--radius-2xl); padding: 28px 24px; box-shadow: var(--shadow-lg); border: 1px solid #f0e0e8; max-width: 580px; margin: 0 auto; }
+    body.dark .detail-container { background: var(--dark-card); border-color: var(--dark-border); }
+    .variant-option { display: flex; justify-content: space-between; padding: 12px 16px; border-radius: 12px; border: 1.5px solid #f0e0e8; cursor: pointer; margin-bottom: 6px; }
+    .variant-option.selected { border-color: #ff6b9d; background: #fff5f8; }
+    .btn-primary { padding: 11px 26px; border-radius: 25px; font-weight: 700; background: linear-gradient(135deg, #ff6b9d, #d63384); color: white; border: none; cursor: pointer; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary { padding: 11px 26px; border-radius: 25px; font-weight: 600; border: 1.5px solid #ddd; background: white; color: #666; cursor: pointer; }
+
+    .payment-card { background: white; border-radius: var(--radius-2xl); padding: 28px 24px; text-align: center; box-shadow: var(--shadow-lg); border: 1px solid #f0e0e8; max-width: 480px; margin: 0 auto; }
+    body.dark .payment-card { background: var(--dark-card); border-color: var(--dark-border); }
+    .payment-card img.qris { width: 190px; border-radius: 12px; margin: 12px auto; display: block; cursor: pointer; }
+    .download-qris-btn { display: inline-block; margin: 8px 0 16px; padding: 8px 18px; border-radius: 20px; background: #f0f0f0; color: #555; font-size: 12px; font-weight: 600; cursor: pointer; border: none; }
+    .timer-display { font-size: 36px; font-weight: 800; margin: 10px 0; color: #d63384; }
+    .timer-display.urgent { animation: blinkRed 0.5s infinite; color: #e74c3c; }
+    @keyframes blinkRed { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+    .nokos-card { background: linear-gradient(135deg, #fff5f8, #ffe4ec); border: 2px dashed #ff6b9d; border-radius: var(--radius-xl); padding: 24px; text-align: center; margin: 20px 0; }
+    body.dark .nokos-card { background: linear-gradient(135deg, #1e1e32, #2d1a2d); }
+    .nokos-card .wa-btn { display: inline-flex; align-items: center; gap: 8px; background: #25d366; color: white; padding: 12px 24px; border-radius: 25px; font-weight: 700; text-decoration: none; margin-top: 12px; }
+    .nokos-card .wa-btn svg { width: 20px; height: 20px; fill: white; }
+
+    .testimoni-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+    .testimoni-card { background: white; border-radius: 16px; padding: 20px; box-shadow: var(--shadow); border: 1px solid #f0e0e8; }
+    body.dark .testimoni-card { background: var(--dark-card); border-color: var(--dark-border); }
+    .testimoni-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .testimoni-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ff6b9d, #d63384); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px; }
+    .testimoni-name { font-weight: 700; font-size: 14px; }
+    .testimoni-date { font-size: 11px; color: #999; }
+    .testimoni-stars { color: #f59e0b; font-size: 12px; margin-bottom: 6px; }
+    .testimoni-text { font-size: 13px; color: #666; line-height: 1.6; font-style: italic; }
+    body.dark .testimoni-text { color: #bbb; }
+    .testimoni-product { font-size: 11px; color: #ff6b9d; font-weight: 600; margin-top: 6px; }
+    .catatan-box { background: #fffef5; border: 1px dashed #f0d000; border-radius: 14px; padding: 16px 20px; margin-top: 20px; font-size: 13px; color: #8b7a00; }
+    body.dark .catatan-box { background: #1e1e20; border-color: #5a5000; color: #c0b000; }
+
+    /* Info bar */
+    .info-bar {
+      background: linear-gradient(135deg, #fff5f8, #ffe4ec);
+      border: 1px solid #ffb6c1;
+      border-radius: 14px;
+      padding: 12px 18px;
+      text-align: center;
+      margin: 15px 0;
+      font-size: 13px;
+      color: #d63384;
+      font-weight: 600;
+    }
+    body.dark .info-bar { background: linear-gradient(135deg, #1e1e32, #2d1a2d); border-color: #ff6b9d; }
+
+    .sticky-wa { position: fixed; bottom: 85px; right: 20px; z-index: 998; background: #25d366; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(37,211,102,0.35); text-decoration: none; }
+    .sticky-wa svg { width: 30px; height: 30px; fill: white; }
+    .back-top { position: fixed; bottom: 25px; right: 20px; background: white; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); z-index: 998; }
+    footer { text-align: center; padding: 20px; font-size: 12px; color: #bbb; }
+
+    @media (max-width: 640px) {
+      .product-row, .product-row.right { justify-content: center; }
+      .product-card { width: 100%; }
+      .testimoni-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="running-text-bar">
+    <div class="running-text-inner" id="runningTextInner">
+      <span>🎉 Alisha R. baru saja membeli CapCut Premium 1 Bulan!</span>
+      <span>⭐ Bintang 5 dari Dimas P. untuk Spotify Premium</span>
+      <span>🛒 Rina K. membeli TikTok Followers 200</span>
+      <span>💗 Febriana S. membeli Instagram Likes 500</span>
+      <span>🔥 Andi M. membeli Alight Motion 1 Tahun</span>
+      <span>✨ Sinta W. membeli Netflix Premium 1 Bulan</span>
+      <span>🌟 Rating 5⭐ dari Budi H. - TikTok Viewers</span>
+      <span>🎀 Citra L. membeli Instagram Followers Indonesia</span>
+      <span>💎 Dika R. membeli Spotify Premium 3 Bulan</span>
+      <span>🌸 Naura A. membeli Wink Premium 7 Days</span>
+      <span>🏆 Reza F. membeli TikTok Likes 1000</span>
+      <span>💫 Maya S. membeli Instagram Followers 300</span>
+      <span>🎯 Hadi P. membeli CapCut Premium Private</span>
+      <span>💖 Laila K. membeli Alight Motion Email Seller</span>
+      <span>🔥 Top Seller 2026! 2000+ transaksi sukses bulan ini</span>
+    </div>
+  </div>
+
+  <div id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-logo-wrap"><img src="https://files.catbox.moe/dwpq0k.jpg" alt="Logo"><div class="orbit-ring"></div></div>
+      <div class="loading-percent" id="loadPercent">1%</div>
+      <div class="loading-brand">IMACY STORE 2026</div>
+      <div class="loading-progress"><div class="loading-progress-fill" id="loadBar"></div></div>
+    </div>
+  </div>
+
+  <div class="dark-toggle" id="darkToggle">☀️</div>
+
+  <div id="app">
+    <div class="site-header">
+      <img src="https://files.catbox.moe/dwpq0k.jpg" alt="Logo" class="header-logo">
+      <div class="brand-text"><h1>IMACY STORE</h1><span>Premium Digital Products • Since 2024</span></div>
+    </div>
+
+    <div class="music-player">
+      <span class="song-title" id="songDisplay">🎵 Hindia - MEMBASUH</span>
+      <div class="visualizer" id="visualizer"></div>
+      <div class="music-ctrls">
+        <button class="ctrl-btn" id="prevBtn">⏮</button>
+        <button class="ctrl-btn" id="playPauseBtn">⏯</button>
+        <button class="ctrl-btn" id="nextBtn">⏭</button>
+      </div>
+    </div>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+      💬 Ada APK Premium yang belum terdaftar? Langsung tanya admin ya! <a href="https://wa.me/6283192875086?text=Halo%20admin%20Imacy!%20Saya%20mau%20tanya%20soal%20APK%20premium%20nih..." style="color:#ff6b9d;font-weight:700;">Klik di sini →</a>
+    </div>
+
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-page="home">Home</button>
+      <button class="nav-tab" data-page="catalog">Katalog</button>
+      <button class="nav-tab" data-page="netflix">Netflix Premium</button>
+      <button class="nav-tab" data-page="nokos">Nokos All Country</button>
+      <button class="nav-tab" data-page="testimoni">Testimoni</button>
+      <button class="nav-tab" data-page="payment">Pembayaran</button>
+    </div>
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="hero-card" data-aos="fade-up">
+        <h2 style="font-weight:800;font-size:24px;background:linear-gradient(135deg,#ff6b9d,#c445a6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Selamat Datang di Imacy Store 2026</h2>
+        <p style="color:#888;">Produk digital premium dengan harga terbaik dan garansi</p>
+        <img src="https://files.catbox.moe/35lxny.jpg" alt="Hero" class="hero-img" loading="lazy">
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="stat-number" id="totalSold">0</div><div class="stat-label" style="font-size:11px;color:#999;">Produk Terjual</div></div>
+          <div class="hero-stat"><div class="stat-number">4.9</div><div class="stat-label" style="font-size:11px;color:#999;">⭐ Rating</div></div>
+          <div class="hero-stat"><div class="stat-number" id="totalBuyers">0</div><div class="stat-label" style="font-size:11px;color:#999;">Pembeli Puas</div></div>
+        </div>
+      </div>
+      <div class="section-title">Produk Unggulan 2026</div>
+      <div class="products-grid" id="featuredProducts"></div>
+    </div>
+
+    <!-- CATALOG -->
+    <div class="page" id="page-catalog">
+      <div class="section-title">Katalog Lengkap 2026</div>
+      <div class="search-container">
+        <input type="text" id="searchInputCatalog" placeholder="🔍 Cari produk... (capcut, tiktok, spotify, netflix)" oninput="filterProducts()">
+        <span class="search-icon">🔍</span>
+      </div>
+      <div class="search-results-count" id="searchResultsCount" style="display:none;text-align:center;font-size:12px;color:#999;margin-bottom:10px;"></div>
+      <div class="products-grid" id="catalogProducts"></div>
+    </div>
+
+    <!-- NETFLIX PREMIUM -->
+    <div class="page" id="page-netflix">
+      <div class="section-title">Netflix Premium 2026</div>
+      <div class="products-grid" id="netflixProducts"></div>
+    </div>
+
+    <!-- NOKOS -->
+    <div class="page" id="page-nokos">
+      <div class="section-title">Nokos All Country 2026</div>
+      <div class="nokos-card" data-aos="zoom-in">
+        <h3>🌏 Nomor Kosong All Country</h3>
+        <p style="color:#777;margin-bottom:8px;">Tersedia nomor kosong berbagai negara untuk verifikasi akun</p>
+        <p style="font-size:13px;color:#999;">🇮🇩 Indonesia • 🇺🇸 USA • 🇬🇧 UK • 🇩🇪 Germany • 🇯🇵 Japan • 🇰🇷 Korea • 🇧🇷 Brazil • +50 Negara Lainnya</p>
+        <a href="https://wa.me/6283192875086?text=Halo%20admin%20Imacy!%20Saya%20mau%20tanya%20soal%20Nokos%20All%20Country%20nih%20🌏" target="_blank" class="wa-btn">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          Chat Admin untuk Nokos
+        </a>
+      </div>
+    </div>
+
+    <!-- TESTIMONI -->
+    <div class="page" id="page-testimoni">
+      <div class="section-title">Testimoni Pelanggan 2026</div>
+      <div class="testimoni-grid" id="testimoniGrid"></div>
+      <div class="catatan-box">
+        <strong>📝 Catatan Penting 2026:</strong> Semua testimoni di atas adalah asli dari pelanggan setia Imacy Store. Kepuasan pelanggan adalah prioritas utama kami. Di tahun 2026 ini, kami terus berkomitmen memberikan produk digital berkualitas dengan pelayanan terbaik. Jika ada kendala, jangan ragu untuk menghubungi admin via WhatsApp yang tersedia 24/7. Terima kasih telah mempercayai Imacy Store! 💗✨
+      </div>
+    </div>
+
+    <!-- DETAIL -->
+    <div class="page" id="page-detail">
+      <div class="detail-container" id="detailContent"></div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="page" id="page-payment">
+      <div class="payment-card" data-aos="zoom-in">
+        <h3 style="font-weight:800;color:#d63384;font-size:20px;">Pembayaran QRIS</h3>
+        <img src="https://files.catbox.moe/fh0o80.jpg" class="qris" alt="QRIS" loading="lazy" id="qrisImage" onclick="downloadQRIS()" title="Klik untuk download QRIS">
+        <button class="download-qris-btn" onclick="downloadQRIS()">📥 Download QRIS</button>
+        <p style="font-size:12px;color:#999;">Klik gambar atau tombol untuk download QRIS</p>
+        <div class="selected-info" id="selectedVariantInfo" style="background:#fef5f9;border-radius:12px;padding:12px;margin:10px 0;font-weight:600;color:#d63384;font-size:13px;">Silakan pilih produk terlebih dahulu</div>
+        <button class="btn-primary" id="startPaymentBtn">Bayar Sekarang</button>
+        <div class="timer-display" id="timerDisplay" style="display:none;">10:00</div>
+        <button class="btn-primary" id="confirmPaymentBtn" style="display:none;background:linear-gradient(135deg,#6fcf97,#27ae60);">Konfirmasi Pembayaran</button>
+        <div style="background:#fef9fb;border-radius:12px;padding:14px;margin-top:16px;font-size:12px;color:#8b6a7a;border:1px dashed #f0d0e0;">Transfer sesuai nominal dalam <strong>10 menit</strong>. Upload bukti & konfirmasi ke admin.</div>
+      </div>
+    </div>
+
+    <footer>&copy; 2026 Imacy Store • Trusted Digital Products Since 2024</footer>
+  </div>
+
+  <a href="https://wa.me/6283192875086?text=Halo%20admin%20Imacy!%20Saya%20mau%20tanya%20soal%20produk%20nih%20😊" target="_blank" class="sticky-wa" title="Chat WhatsApp Admin">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+  <div class="back-top" id="backTop">↑</div>
+
+  <audio id="audioPlayer"></audio>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // ===== LOADING =====
+    const loadingScreen=document.getElementById('loadingScreen'),loadPercent=document.getElementById('loadPercent'),loadBar=document.getElementById('loadBar');
+    let pct=1;
+    const loadInt=setInterval(()=>{
+      pct+=Math.floor(Math.random()*5)+3;
+      if(pct>=100){pct=100;clearInterval(loadInt);}
+      loadPercent.textContent=pct+'%';loadBar.style.width=pct+'%';
+      if(pct>=100) setTimeout(()=>{loadingScreen.style.opacity='0';setTimeout(()=>{loadingScreen.style.display='none';document.getElementById('app').classList.add('active');AOS.refresh();updateStats();renderTestimoni();renderNetflix();},600);},200);
+    },25);
+
+    // ===== DARK MODE =====
+    document.getElementById('darkToggle').addEventListener('click',()=>{
+      document.body.classList.toggle('dark');
+      document.getElementById('darkToggle').textContent=document.body.classList.contains('dark')?'🌙':'☀️';
+    });
+
+    // ===== MUSIC =====
+    const playlist=[
+      {title:'Hindia - MEMBASUH',src:'https://files.catbox.moe/t7wuvq.mp3'},
+      {title:'Hindia - Everything You Are',src:'https://files.catbox.moe/f78lb2.mp3'},
+      {title:'Nadin Amizah - Rayuan Perempuan Gila',src:'https://files.catbox.moe/3j4e7h.mp3'}
+    ];
+    let cur=0,playing=false;
+    const audio=document.getElementById('audioPlayer'),songDisp=document.getElementById('songDisplay'),ppBtn=document.getElementById('playPauseBtn');
+    function loadTrack(i){audio.src=playlist[i].src;audio.load();cur=i;songDisp.textContent='🎵 '+playlist[i].title;}
+    function togglePlay(){if(playing){audio.pause();ppBtn.textContent='⏯';playing=false;}else{audio.play().catch(()=>{});ppBtn.textContent='⏸';playing=true;}}
+    ppBtn.addEventListener('click',togglePlay);
+    document.getElementById('prevBtn').addEventListener('click',()=>{let p=(cur-1+playlist.length)%playlist.length;loadTrack(p);if(playing)audio.play().catch(()=>{});});
+    document.getElementById('nextBtn').addEventListener('click',()=>{let n=(cur+1)%playlist.length;loadTrack(n);if(playing)audio.play().catch(()=>{});});
+    audio.addEventListener('ended',()=>{let n=(cur+1)%playlist.length;loadTrack(n);if(playing)audio.play().catch(()=>{});});
+    audio.addEventListener('play',()=>{playing=true;ppBtn.textContent='⏸';});
+    audio.addEventListener('pause',()=>{playing=false;ppBtn.textContent='⏯';});
+    loadTrack(0);
+    const vis=document.getElementById('visualizer');
+    for(let i=0;i<15;i++){const b=document.createElement('div');b.className='bar';b.style.animationDuration=(0.2+Math.random()*0.5)+'s';b.style.animationDelay=(Math.random()*0.3)+'s';vis.appendChild(b);}
+
+    const runningInner=document.getElementById('runningTextInner');
+    runningInner.innerHTML=runningInner.innerHTML+runningInner.innerHTML;
+
+    function downloadQRIS(){
+      const link=document.createElement('a');
+      link.href='https://files.catbox.moe/fh0o80.jpg';
+      link.download='QRIS_Imacy_Store_2026.jpg';
+      document.body.appendChild(link);link.click();document.body.removeChild(link);
+    }
+
+    // ===== TESTIMONI =====
+    const testimoniData=[
+      {name:'Alisha Rahmawati',initial:'AR',date:'15 Maret 2026',stars:5,text:'CapCut Premiumnya mantap banget! Udah langganan dari 2024. Admin fast respon 24 jam.',product:'CapCut Premium 1 Bulan'},
+      {name:'Dimas Pratama',initial:'DP',date:'12 Maret 2026',stars:5,text:'Spotify Premiumnya original dan garansi penuh. Udah 2 tahun pakai terus di Imacy!',product:'Spotify Premium 3 Bulan'},
+      {name:'Rina Kusuma',initial:'RK',date:'10 Maret 2026',stars:5,text:'Followers TikToknya real looking! Udah beli 5x buat akun berbeda. Adminnya profesional.',product:'TikTok Followers 300'},
+      {name:'Kevin Anggara',initial:'KA',date:'8 Maret 2026',stars:5,text:'Netflix Premiumnya murah banget! Akun strong 1P1U awet dan lancar. Recommended!',product:'Netflix Premium 1 Bulan'},
+      {name:'Febriana Sari',initial:'FS',date:'6 Maret 2026',stars:5,text:'Likes Instagram langsung masuk bertahap, aman natural. Harga 2026 makin worth it!',product:'Instagram Likes 500'},
+      {name:'Andi Maulana',initial:'AM',date:'4 Maret 2026',stars:4,text:'Alight Motion works perfectly! Tutorial lengkap 2026 sangat membantu.',product:'Alight Motion 1 Tahun'},
+      {name:'Sinta Wulandari',initial:'SW',date:'2 Maret 2026',stars:5,text:'Netflix semiprivate strong awet banget! Udah 2 bulan lebih masih aman. TOP!',product:'Netflix Semiprivate 1 Bulan'},
+      {name:'Budi Hartono',initial:'BH',date:'28 Februari 2026',stars:5,text:'Viewers TikToknya boost! Live streaming jadi rame. Makasih Imacy Store 2026!',product:'TikTok Viewers 500'},
+      {name:'Citra Lestari',initial:'CL',date:'25 Februari 2026',stars:5,text:'Followers IG Indonesia asli! Bisnisku makin berkembang berkat Imacy Store.',product:'Instagram Followers Indonesia 300'},
+      {name:'Dika Ramadhan',initial:'DR',date:'22 Februari 2026',stars:5,text:'Beli Spotify Premium 3 bulan, aman. Harga 2026 miring, kualitas bintang 5!',product:'Spotify Premium 3 Bulan'}
+    ];
+
+    function generateStarsHTML(rating){
+      let html='';
+      for(let i=0;i<5;i++){html+=i<rating?'<span>★</span>':'<span style="color:#ddd;">★</span>';}
+      return html;
+    }
+
+    function renderTestimoni(){
+      const grid=document.getElementById('testimoniGrid');
+      if(!grid)return;
+      grid.innerHTML=testimoniData.map((t,i)=>`
+        <div class="testimoni-card" data-aos="fade-up" data-aos-delay="${i*50}">
+          <div class="testimoni-header"><div class="testimoni-avatar">${t.initial}</div><div><div class="testimoni-name">${t.name}</div><div class="testimoni-date">${t.date}</div></div></div>
+          <div class="testimoni-stars">${generateStarsHTML(t.stars)}</div>
+          <div class="testimoni-text">"${t.text}"</div>
+          <div class="testimoni-product">🛒 ${t.product}</div>
+        </div>
+      `).join('');
+    }
+
+    // ===== NETFLIX DATA =====
+    const netflixProduct = {
+      id: 99, brand: 'Netflix', brandLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1200px-Netflix_2015_logo.svg.png',
+      title: 'NETFLIX PREMIUM 2026', rating: 4.9, sold: 987,
+      desc: 'Nikmati Netflix Premium dengan berbagai pilihan akun. Tersedia akun biasa, strong, dan semiprivate. Kualitas terbaik dengan harga terjangkau!',
+      categories: [
+        { name: 'Akun Biasa 1P1U', items: [
+          { n: '1P1U 1 Hari', p: 'Rp 1.900' }, { n: '1P1U 3 Hari', p: 'Rp 2.900' },
+          { n: '1P1U 5 Hari', p: 'Rp 3.900' }, { n: '1P1U 7 Hari', p: 'Rp 5.500' },
+          { n: '1P1U 1 Bulan', p: 'Rp 21.500' }
+        ]},
+        { name: 'Akun Biasa 1P2U', items: [
+          { n: '1P2U 1 Hari', p: 'Rp 1.900' }, { n: '1P2U 3 Hari', p: 'Rp 2.500' },
+          { n: '1P2U 5 Hari', p: 'Rp 2.900' }, { n: '1P2U 7 Hari', p: 'Rp 3.500' },
+          { n: '1P2U 1 Bulan', p: 'Rp 17.000' }
+        ]},
+        { name: 'Akun Strong 1P1U', items: [
+          { n: '1P1U 1 Hari', p: 'Rp 3.500' }, { n: '1P1U 3 Hari', p: 'Rp 5.500' },
+          { n: '1P1U 5 Hari', p: 'Rp 10.500' }, { n: '1P1U 7 Hari', p: 'Rp 13.500' },
+          { n: '1P1U 1 Bulan', p: 'Rp 22.500' }
+        ]},
+        { name: 'Akun Strong 1P2U', items: [
+          { n: '1P2U 1 Hari', p: 'Rp 2.500' }, { n: '1P2U 3 Hari', p: 'Rp 4.500' },
+          { n: '1P2U 5 Hari', p: 'Rp 5.500' }, { n: '1P2U 7 Hari', p: 'Rp 9.500' },
+          { n: '1P2U 1 Bulan', p: 'Rp 20.000' }
+        ]},
+        { name: 'Akun Semiprivate', items: [
+          { n: '1 Bulan Strong', p: 'Rp 30.000' }
+        ]}
+      ]
+    };
+
+    function renderNetflix(){
+      const container = document.getElementById('netflixProducts');
+      if(!container) return;
+      const allVariants = netflixProduct.categories.flatMap(cat => cat.items);
+      const preview = allVariants.slice(0, 4).map(v => v.n + ' - ' + v.p).join(' | ');
+      
+      container.innerHTML = `
+        <div class="product-row">
+          <div class="product-card netflix-card" data-aos="fade-up">
+            <div class="netflix-banner">🔥 BEST SELLER 2026 <span class="rekomendasi-badge">REKOMENDASI</span></div>
+            <div class="mac-bar"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div>
+            <div class="card-body">
+              <div class="product-brand">
+                <img src="${netflixProduct.brandLogo}" alt="Netflix" onerror="this.src='https://files.catbox.moe/dwpq0k.jpg'">
+                <span class="brand-name" style="color:#e50914;">${netflixProduct.brand}</span>
+              </div>
+              <div style="font-weight:600;font-size:15px;margin-bottom:6px;color:#fff;">${netflixProduct.title}</div>
+              <div class="rating-sold-row">
+                <span class="stars">${generateStars(netflixProduct.rating)}</span>
+                <span style="font-weight:700;color:#ddd;">${netflixProduct.rating}</span>
+                <span class="sold-badge">🛒 ${netflixProduct.sold.toLocaleString()} terjual</span>
+              </div>
+              <table class="netflix-price-table">
+                ${netflixProduct.categories.map(cat => `
+                  <tr><td colspan="2" style="color:#e50914;font-weight:700;padding-top:8px;">${cat.name}</td></tr>
+                  ${cat.items.map(item => `
+                    <tr><td>${item.n}</td><td class="price">${item.p}</td></tr>
+                  `).join('')}
+                `).join('')}
+              </table>
+              <button class="btn-outline" style="border-color:#e50914;color:#e50914;margin-top:8px;" onclick="viewDetailNetflix()">Pilih Varian & Beli</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function viewDetailNetflix(){
+      selectedProduct = {
+        id: 99, brand: 'Netflix', brandLogo: netflixProduct.brandLogo,
+        title: netflixProduct.title, desc: netflixProduct.desc,
+        rating: netflixProduct.rating, sold: netflixProduct.sold,
+        variants: netflixProduct.categories.flatMap(cat => cat.items)
+      };
+      selectedVariant = null;
+      document.getElementById('detailContent').innerHTML = `
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;padding-bottom:16px;border-bottom:1px solid #f0e0e8;">
+          <img src="${netflixProduct.brandLogo}" style="width:48px;height:48px;border-radius:12px;object-fit:contain;background:#111;padding:6px;" onerror="this.src='https://files.catbox.moe/dwpq0k.jpg'">
+          <h3 style="font-weight:700;">${netflixProduct.title}</h3>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+          <span class="stars">${generateStars(netflixProduct.rating)}</span><span style="font-weight:700;">${netflixProduct.rating}</span>
+          <span class="sold-badge">🛒 ${netflixProduct.sold.toLocaleString()} terjual</span>
+        </div>
+        <div style="font-size:13px;color:#777;line-height:1.7;margin-bottom:18px;background:#fefbfc;padding:14px 16px;border-radius:12px;">${netflixProduct.desc}</div>
+        ${netflixProduct.categories.map(cat => `
+          <div style="font-weight:700;color:#e50914;margin:10px 0 6px;">${cat.name}</div>
+          ${cat.items.map((v,i) => `<div class="variant-option" data-index="${selectedProduct.variants.indexOf(v)}" onclick="selectVariant(${selectedProduct.variants.indexOf(v)},this)"><span style="font-weight:600;">${v.n}</span><span style="font-weight:700;color:#d63384;">${v.p}</span></div>`).join('')}
+        `).join('')}
+        <div style="display:flex;gap:10px;margin-top:22px;justify-content:center;">
+          <button class="btn-primary" id="btnBuyDetail" disabled onclick="goToPayment()">Lanjutkan Pembayaran</button>
+          <button class="btn-secondary" onclick="navigateTo('catalog')">Kembali</button>
+        </div>`;
+      navigateTo('detail');
+    }
+
+    // ===== PRODUCT DATA =====
+    const products=[
+      {id:1,brand:'CapCut',brandLogo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/CapCut_logo.svg/1200px-CapCut_logo.svg.png',title:'CAPCUT PREMIUM (Sharing) 2026',desc:'Akses CapCut Premium sistem sharing. Cocok untuk editing video tanpa watermark.',rating:4.8,sold:1847,recommended:true,variants:[{n:'7 Days',p:'Rp 10.000'},{n:'1 Bulan',p:'Rp 28.900'}]},
+      {id:2,brand:'CapCut',brandLogo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/CapCut_logo.svg/1200px-CapCut_logo.svg.png',title:'CAPCUT PREMIUM (Private) 2026',desc:'CapCut Premium akun private hanya untuk kamu. Bebas akses semua fitur.',rating:4.9,sold:1292,variants:[{n:'7 Days',p:'Rp 12.500'},{n:'1 Bulan',p:'Rp 35.000'}]},
+      {id:3,brand:'Alight Motion',brandLogo:'https://play-lh.googleusercontent.com/3CYoRO7o4BNDFV4gErjVhFgKJ8Fk0O4xMiwyFgI5aQkNx3IjRKQRWxQN6S9F5OhGnA',title:'ALIGHT MOTION 1 Tahun + Full Tutor 2026',desc:'Alight Motion Pro 1 tahun full access dengan tutorial lengkap edisi 2026.',rating:4.7,sold:945,variants:[{n:'Email Seller',p:'Rp 5.500'},{n:'Email Buyers',p:'Rp 4.000'}]},
+      {id:4,brand:'Wink',brandLogo:'https://play-lh.googleusercontent.com/FiaWdIhLm6qV1eLFxpMOBKBd7QgpR1aLhCECTr1RyRx6GgOqM4WqjBXE-1VGJlGWZg',title:'WINK PREMIUM 2026',desc:'Wink Premium untuk edit video aesthetic dengan filter eksklusif terbaru.',rating:4.6,sold:623,variants:[{n:'7 Days Acc B',p:'Rp 3.500'}]},
+      {id:5,brand:'Spotify',brandLogo:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png',title:'SPOTIFY PREMIUM (Individual) 2026',desc:'Spotify Premium individual plan. Nikmati musik tanpa iklan, download offline.',rating:4.9,sold:2160,recommended:true,variants:[{n:'1 Bulan No Garansi',p:'Rp 16.000'},{n:'1 Bulan Full Garansi',p:'Rp 16.000'},{n:'3 Bulan No Garansi',p:'Rp 17.400'}]},
+      {id:6,brand:'TikTok',brandLogo:'https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1200px-TikTok_logo.svg.png',title:'TIKTOK FOLLOWERS (Permanen) 2026',desc:'Tambah followers TikTok permanen kualitas terbaik. Tidak drop, real looking.',rating:4.7,sold:3340,variants:[{n:'50',p:'Rp 5.000'},{n:'100',p:'Rp 10.500'},{n:'200',p:'Rp 20.500'},{n:'300',p:'Rp 30.700'}]},
+      {id:7,brand:'TikTok',brandLogo:'https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1200px-TikTok_logo.svg.png',title:'TIKTOK LIKES 2026',desc:'Tingkatkan likes TikTok dengan cepat dan aman. Likes permanen.',rating:4.8,sold:2690,variants:[{n:'100',p:'Rp 4.600'},{n:'500',p:'Rp 19.200'},{n:'1000',p:'Rp 36.900'}]},
+      {id:8,brand:'TikTok',brandLogo:'https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1200px-TikTok_logo.svg.png',title:'TIKTOK VIEWERS 2026',desc:'Boost viewers TikTok untuk meningkatkan exposure konten.',rating:4.5,sold:1487,variants:[{n:'100',p:'Rp 1.000'},{n:'500',p:'Rp 5.750'},{n:'1000',p:'Rp 10.000'}]},
+      {id:9,brand:'Instagram',brandLogo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png',title:'INSTAGRAM FOLLOWERS (Permanen) 2026',desc:'Followers IG permanen kualitas terbaik. Profil tetap aman natural.',rating:4.8,sold:1700,variants:[{n:'50',p:'Rp 5.500'},{n:'100',p:'Rp 8.000'},{n:'200',p:'Rp 17.000'},{n:'300',p:'Rp 25.000'}]},
+      {id:10,brand:'Instagram',brandLogo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png',title:'INSTAGRAM FOLLOWERS INDONESIA 2026',desc:'Followers IG khusus Indonesia. Real looking dan aktif.',rating:4.7,sold:1156,variants:[{n:'50',p:'Rp 7.400'},{n:'100',p:'Rp 13.900'},{n:'200',p:'Rp 26.500'},{n:'300',p:'Rp 39.700'}]},
+      {id:11,brand:'Instagram',brandLogo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png',title:'INSTAGRAM LIKES (Permanen) 2026',desc:'Likes Instagram permanen untuk meningkatkan engagement.',rating:4.6,sold:1290,variants:[{n:'100',p:'Rp 4.900'},{n:'300',p:'Rp 13.000'},{n:'500',p:'Rp 21.000'}]}
+    ];
+
+    let selectedProduct=null,selectedVariant=null;
+
+    function generateStars(rating){
+      const full=Math.floor(rating);const empty=5-full;
+      let stars='';
+      for(let i=0;i<full;i++) stars+='<span class="star">★</span>';
+      for(let i=0;i<empty;i++) stars+='<span class="star" style="color:#ddd;">★</span>';
+      return stars;
+    }
+
+    function renderProductCard(p,i,cid){
+      const c=document.getElementById(cid);if(!c)return;
+      const row=document.createElement('div');row.className='product-row'+(i%2!==0?' right':'');
+      const card=document.createElement('div');card.className='product-card';
+      card.setAttribute('data-aos',['fade-up','fade-left','fade-right','zoom-in','flip-left'][i%5]);
+      card.setAttribute('data-aos-duration','700');card.setAttribute('data-aos-once','true');
+      const preview=p.variants.slice(0,3).map(v=>v.n+' - '+v.p).join(' | ');
+      card.innerHTML=`
+        <div class="mac-bar"><span class="mac-dot red"></span><span class="mac-dot yellow"></span><span class="mac-dot green"></span></div>
+        <div class="card-body">
+          <div class="product-brand"><img src="${p.brandLogo}" alt="${p.brand}" onerror="this.src='https://files.catbox.moe/dwpq0k.jpg'"><span class="brand-name">${p.brand}</span>${p.recommended?'<span class="rekomendasi-badge">⭐ REKOMENDASI</span>':''}</div>
+          <div style="font-weight:600;font-size:14px;color:#555;margin-bottom:4px;">${p.title}</div>
+          <div class="rating-sold-row">
+            <span class="stars">${generateStars(p.rating)}</span><span style="font-weight:700;font-size:13px;">${p.rating}</span>
+            <span class="sold-badge">🛒 ${p.sold.toLocaleString()} terjual</span>
+          </div>
+          <div style="font-size:12px;color:#999;margin-bottom:6px;">${preview}${p.variants.length>3?' ...dan '+(p.variants.length-3)+' varian':''}</div>
+          <button class="btn-outline" onclick="viewDetail(${p.id})">Pilih Varian</button>
+        </div>`;
+      row.appendChild(card);c.appendChild(row);
+    }
+
+    function renderAll(){
+      ['featuredProducts','catalogProducts'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
+      const featured = products.filter(p => p.recommended);
+      featured.forEach((p,i)=>renderProductCard(p,i,'featuredProducts'));
+      products.forEach((p,i)=>renderProductCard(p,i,'catalogProducts'));
+    }
+
+    function updateStats(){
+      const totalSold=products.reduce((a,p)=>a+p.sold,0)+netflixProduct.sold;
+      document.getElementById('totalSold').textContent=totalSold.toLocaleString();
+      document.getElementById('totalBuyers').textContent=Math.floor(totalSold*0.85).toLocaleString();
+    }
+
+    // ===== NAVIGATION =====
+    const pages={home:document.getElementById('page-home'),catalog:document.getElementById('page-catalog'),netflix:document.getElementById('page-netflix'),nokos:document.getElementById('page-nokos'),testimoni:document.getElementById('page-testimoni'),detail:document.getElementById('page-detail'),payment:document.getElementById('page-payment')};
+    function navigateTo(page){
+      Object.values(pages).forEach(p=>p.classList.remove('active'));
+      if(pages[page])pages[page].classList.add('active');
+      document.querySelectorAll('.nav-tab').forEach(t=>{t.classList.remove('active');if(t.dataset.page===page)t.classList.add('active');});
+      window.scrollTo({top:0,behavior:'smooth'});
+      setTimeout(()=>AOS.refresh(),150);
+      updatePaymentInfo();
+    }
+    document.querySelectorAll('.nav-tab').forEach(t=>t.addEventListener('click',()=>navigateTo(t.dataset.page)));
+
+    function viewDetail(pid){
+      const p=products.find(x=>x.id===pid);if(!p)return;
+      selectedProduct=p;selectedVariant=null;
+      document.getElementById('detailContent').innerHTML=`
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;padding-bottom:16px;border-bottom:1px solid #f0e0e8;">
+          <img src="${p.brandLogo}" style="width:48px;height:48px;border-radius:12px;object-fit:contain;background:#f8f8f8;padding:6px;" onerror="this.src='https://files.catbox.moe/dwpq0k.jpg'">
+          <h3 style="font-weight:700;font-size:18px;">${p.title}</h3>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+          <span class="stars">${generateStars(p.rating)}</span><span style="font-weight:700;">${p.rating}</span>
+          <span class="sold-badge">🛒 ${p.sold.toLocaleString()} terjual</span>
+        </div>
+        <div style="font-size:13px;color:#777;line-height:1.7;margin-bottom:18px;background:#fefbfc;padding:14px 16px;border-radius:12px;">${p.desc}</div>
+        ${p.variants.map((v,i)=>`<div class="variant-option" data-index="${i}" onclick="selectVariant(${i},this)"><span style="font-weight:600;">${v.n}</span><span style="font-weight:700;color:#d63384;">${v.p}</span></div>`).join('')}
+        <div style="display:flex;gap:10px;margin-top:22px;justify-content:center;">
+          <button class="btn-primary" id="btnBuyDetail" disabled onclick="goToPayment()">Lanjutkan Pembayaran</button>
+          <button class="btn-secondary" onclick="navigateTo('catalog')">Kembali</button>
+        </div>`;
+      navigateTo('detail');
+    }
+
+    function selectVariant(idx,el){
+      document.querySelectorAll('.variant-option').forEach(o=>o.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedVariant=selectedProduct.variants[idx];
+      document.getElementById('btnBuyDetail').disabled=false;
+    }
+
+    function goToPayment(){if(!selectedVariant){alert('Pilih varian dulu ya!');return;}navigateTo('payment');}
+
+    function updatePaymentInfo(){
+      const info=document.getElementById('selectedVariantInfo');
+      if(selectedProduct&&selectedVariant) info.innerHTML=`<strong>${selectedProduct.title}</strong><br>Varian: ${selectedVariant.n} — ${selectedVariant.p}`;
+      else info.innerHTML='Silakan pilih produk dari <a href="javascript:navigateTo(\'catalog\')" style="color:#ff6b9d;">Katalog</a>';
+    }
+
+    // ===== SEARCH =====
+    function filterProducts(){
+      const query=document.getElementById('searchInputCatalog').value.toLowerCase();
+      const container=document.getElementById('catalogProducts');
+      const countEl=document.getElementById('searchResultsCount');
+      const allCards=container.querySelectorAll('.product-row');
+      let visibleCount=0;
+      allCards.forEach(row=>{
+        const text=row.textContent.toLowerCase();
+        if(text.includes(query)){row.style.display='';visibleCount++;}
+        else{row.style.display='none';}
+      });
+      countEl.style.display=query.length>0?'block':'none';
+      if(query.length>0)countEl.textContent=`Ditemukan ${visibleCount} produk untuk "${query}"`;
+    }
+
+    // ===== TIMER =====
+    let timerInt,timeLeft=600;
+    const timerDisp=document.getElementById('timerDisplay'),startBtn=document.getElementById('startPaymentBtn'),confirmBtn=document.getElementById('confirmPaymentBtn');
+    function updateTimer(){const m=Math.floor(timeLeft/60),s=timeLeft%60;timerDisp.textContent=`${m}:${s<10?'0':''}${s}`;if(timeLeft<60)timerDisp.classList.add('urgent');else timerDisp.classList.remove('urgent');}
+    startBtn.addEventListener('click',()=>{
+      if(!selectedVariant){alert('Pilih produk dulu ya!');return;}
+      if(timerInt)clearInterval(timerInt);timeLeft=600;timerDisp.style.display='block';confirmBtn.style.display='inline-block';updateTimer();
+      timerInt=setInterval(()=>{timeLeft--;updateTimer();if(timeLeft<=0){clearInterval(timerInt);timerDisp.style.display='none';confirmBtn.style.display='none';alert('Waktu habis! Silakan ulangi.');}},1000);
+    });
+    confirmBtn.addEventListener('click',()=>{
+      const p=selectedProduct,v=selectedVariant;
+      window.open(`https://wa.me/6283192875086?text=Halo%20admin%20Imacy!%20Konfirmasi%20pembayaran%202026:%0A%0AProduk:%20${encodeURIComponent(p.title)}%0AVarian:%20${encodeURIComponent(v.n)}%0AHarga:%20${encodeURIComponent(v.p)}%0A%0ABukti%20transfer:%0A(lampirkan%20foto)%0A%0ATerima%20kasih!`,'_blank');
+    });
+
+    document.getElementById('backTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    function init(){renderAll();renderNetflix();AOS.init({duration:700,easing:'ease-in-out',once:true});updatePaymentInfo();updateStats();renderTestimoni();}
+    const readyCheck=setInterval(()=>{if(document.getElementById('app').classList.contains('active')){init();clearInterval(readyCheck);}},100);
+  </script>
+</body>
+  </html>
